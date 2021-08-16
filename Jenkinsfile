@@ -2,12 +2,25 @@ pipeline{
     //global agent - its just an maven jar
     agent {
         kubernetes {
-            containerTemplate {
-                name 'maven'
-                image 'jeekajoo/maven-dind:latest'
-                command 'sleep'
-                args 'infinity'
-            }
+            yaml '''
+            apiVersion: v1
+            kind: Pod
+            spec:
+              containers:
+              - name: maven
+                image: jeekajoo/maven-dind:latest
+                command:
+                - sleep
+                args:
+                - 99999
+                volumeMounts:
+                - name: dockersock
+                  mountPath: /var/run/docker.sock
+              volumes:
+              - name: dockersock
+                hostPath:
+                  path: /var/run/docker.sock
+            '''
             defaultContainer 'maven'
         }
     }

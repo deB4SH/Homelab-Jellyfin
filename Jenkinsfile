@@ -67,7 +67,7 @@ pipeline{
                 withCredentials([file(credentialsId: 'settings_xml', variable: 'settings')]) {
                    writeFile file: '.settings/.m2_settings.xml', text: readFile(settings)
                 }
-                sh 'mvn clean package -s .settings/.m2_settings.xml -f pom.xml'
+                sh 'mvn clean install -s .settings/.m2_settings.xml -f pom.xml'
             }
         }
         stage ('deploy: whenRelease') {

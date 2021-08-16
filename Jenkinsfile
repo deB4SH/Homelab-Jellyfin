@@ -69,11 +69,6 @@ pipeline{
                 }
                 sh 'mvn clean package -s .settings/.m2_settings.xml -f pom.xml'
             }
-            post {
-                always {
-                    junit 'target/reports/*.xml'
-                }
-            }
         }
         stage ('deploy: whenRelease') {
             when {

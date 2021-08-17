@@ -76,7 +76,7 @@ pipeline{
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-push-token', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                    sh 'docker login -u $user -p $pass'
+                    sh 'docker login ghcr.io -u $user -p $pass'
                     sh 'mvn deploy -s .settings/.m2_settings.xml -f pom.xml'
                 }
 

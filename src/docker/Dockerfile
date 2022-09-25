@@ -1,4 +1,4 @@
-FROM docker.io/jellyfin/jellyfin:10.8.4-1
+FROM docker.io/jellyfin/jellyfin:10.8.5
 MAINTAINER deB4SH
 #=====
 # This is a temporary image until this issue is resolved inside the official jellyfin container

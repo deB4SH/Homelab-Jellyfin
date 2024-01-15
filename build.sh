@@ -1,4 +1,14 @@
 #! /bin/bash
+# check installed container-cli
+cli_cmd=''
+if [ -x "$(command -v podman)" ]; then
+    cli_cmd="podman"
+elif [ -x "$(command -v docker)" ]; then
+    cli_cmd="docker"
+else
+    echo "No container cli tool found! Aborting."
+    exit -1
+fi
 
 # defaults
 REGISTRY="ghcr.io/deb4sh"
@@ -25,7 +35,7 @@ fi
 
 echo "Building image with tag $TAG"
 
-docker \
+${cli_cmd}  \
     build . \
     -f src/docker/Dockerfile \
     -t $(echo "$REGISTRY/homelab-jellyfin-image:$TAG")
